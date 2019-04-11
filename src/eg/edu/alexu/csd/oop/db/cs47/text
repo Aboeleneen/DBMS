@@ -1,0 +1,98 @@
+package eg.edu.alexu.csd.oop.db.cs47;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import eg.edu.alexu.csd.oop.db.Table;
+
+public class DataTable implements Table {
+	
+	private String dBName ;
+	private String tableName ;
+	private ArrayList<String> columns ;
+	private ArrayList<String> rows ;
+	private Parser parser ;
+	private String[] partsOfCondition;
+	
+	
+	public DataTable(String dBName , String tableName, ArrayList<String> columns) {
+		this.dBName = dBName ;
+		this.tableName = tableName ;
+		this.columns = columns ;
+		rows = new ArrayList<>();
+		parser = new Parser();
+		partsOfCondition = null ;
+	}
+
+	@Override
+	public String[][] select(ArrayList<String> columns, ArrayList<String> conditions) {
+		// TODO Auto-generated method stub
+		String[][] rowValues = new String[20][4] ;/*parser.read(tableName, dBName);*/
+		ArrayList<String> colNames =new ArrayList<>(); /*= (ArrayList<String>) Arrays.asList(parser.getColumns(tableName, dBName));*/
+		 String[][] selectedValues = new String[4][4] ;
+		/* testing */
+		colNames.add("firstName");
+		colNames.add("lastName");
+		colNames.add("address");
+		colNames.add("age");
+		for(int i=0;i<20;i++) {
+			
+				rowValues[i][0] = "mahmoud" + i ;
+				rowValues[i][1] = "fathy" + i ;
+				rowValues[i][2] = "alex" + i ;
+				rowValues[i][3] = Integer.toString(i%5) ;
+			
+		}
+		/* testing */
+		
+		conditions.forEach(condition ->{
+			
+			partsOfCondition = condition.split(" ");
+			String columnName = partsOfCondition[0];
+			String operator = partsOfCondition[1];
+			String value = partsOfCondition[2];
+			int indexOfCol = colNames.indexOf(columnName);
+			int numOfRows =  rowValues.length;
+			int numOfCols = colNames.size();
+			if(operator.equals("=")) {
+				int  indexForRows = 0;
+				
+				for(int i=0 ;i<numOfRows;i++) {
+					
+					if(rowValues[i][indexOfCol].equals(value)) {
+						int indexforCols=0;
+						for(int j=0;j<numOfCols;j++) {
+							if(columns.contains(colNames.get(j))) {
+								//System.out.println(indexForRows);
+								selectedValues[indexForRows][indexforCols] = rowValues[i][j];
+								//System.out.println(rowValues[i][j]);
+								indexforCols++;
+							}
+						}
+						indexForRows++;
+					}
+				}
+			}
+		});
+		// System.out.println(selectedValues.length);
+		return selectedValues;
+	}
+
+	@Override
+	public Boolean insert(ArrayList<String> columns, ArrayList<String> values) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean update(ArrayList<String> columns, ArrayList<String> values, ArrayList<String> conditions) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean delete(ArrayList<String> column) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

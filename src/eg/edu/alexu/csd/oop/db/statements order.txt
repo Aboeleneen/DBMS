@@ -1,0 +1,26 @@
+	1- 	create database database_name;
+	2- 	drop database database_name;
+	3- 	create table table_name (column1_name column1_type , column2_name column2_type ,  .......);
+	4- 	drop table table_name;
+	5- 	insert into table_name values(column1_value ,........);
+	6- 	insert into table_name (column1_name ,.......)values(column1_value ,........);
+	7- 	select * from table_name;
+	8- 	select column1_name , column2_name,....... from table_name;
+	9- 	update table_name set column1_name = value1 , column2_name = value2 ,...... where [conditions]; 
+	10- alter table table_name drop column_name;
+	11- show tables;
+	12- alter table table_name add(column_name column_type,........);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
